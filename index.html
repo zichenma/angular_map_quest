@@ -1,0 +1,35 @@
+<!doctype html>
+<html ng-app='mapQuest'>
+<head>
+    <script src="angular.js"></script>
+    <script src="mapQuest.js"></script>
+    <link rel="stylesheet" href="mapQuest.css">
+</head>
+<body>
+    <h1>MapQuest</h1>
+    <div ng-controller="mapController">
+       <form>
+            <input type="text" ng-model="depart" ng-change="doSearch()"
+                class='rounded'>
+                <input type="text" ng-model="arrive" ng-change="doSearch()"
+                class='rounded'>
+            <button class="btn" ng-click="doSearch()">
+                <i>Get Directions</i></button>
+                </form>       
+        <table>
+        <tr>
+        <th colspan=4>Distance:&nbsp; {{data.route.distance}}m&nbsp;-&nbsp;Time:&nbsp;{{data.route.formattedTime}}</th>
+        </tr>
+        <tr ng-repeat="data in data.route.legs[0].maneuvers">
+            	<td><img class="ui-li-icon profile"  ng-src='{{data.iconUrl}}'/></td>
+                <td>{{$index+1}}. </td>
+                <td><a href={{data.mapUrl}} target="_blank">{{data.narrative}}</a></td>
+                <td>{{data.distance | number : 2}}m</td>        
+        </tr>
+        </table>
+    </div>
+    <a href="https://github.com/zichenma/angular_map_quest.git" target="_blank">Source Code</a>
+</body>
+</html>
+
+
