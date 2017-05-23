@@ -1,34 +1,55 @@
 <!doctype html>
-<html ng-app='mapQuest'>
+<html ng-app='myReport'>
 <head>
-    <script src="angular.js"></script>
-    <script src="mapQuest.js"></script>
-    <link rel="stylesheet" href="mapQuest.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" 
+    integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>MapQuest</h1>
-    <div ng-controller="mapController">
-       <form>
-            <input type="text" ng-model="depart" ng-change="doSearch()"
-                class='rounded'>
-                <input type="text" ng-model="arrive" ng-change="doSearch()"
-                class='rounded'>
-            <button class="btn" ng-click="doSearch()">
-                <i>Get Directions</i></button>
-                </form>       
-        <table>
-        <tr>
-        <th colspan=4>Distance:&nbsp; {{data.route.distance}}m&nbsp;-&nbsp;Time:&nbsp;{{data.route.formattedTime}}</th>
-        </tr>
-        <tr ng-repeat="data in data.route.legs[0].maneuvers">
-            	<td><img class="ui-li-icon profile"  ng-src='{{data.iconUrl}}'/></td>
-                <td>{{$index+1}}. </td>
-                <td><a href={{data.mapUrl}} target="_blank">{{data.narrative}}</a></td>
-                <td>{{data.distance | number : 2}}m</td>        
-        </tr>
-        </table>
+    <div class="container" ng-controller="mainController">
+        <h1>Report</h1>
+        <button class="btn btn-primary" ng-click="doSearch()">Get Report</button>
+        <hr>   
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="input-group">
+                    <input type="text" class="form-control" 
+                    placeholder="Search for..." ng-model="searchText">
+                </div>
+            </div> 
+        </div>
+            <table class=" table-hover table-responsive">
+                <thead>
+                    <tr>
+                        <th ng-repeat="(key, value) in data.items[0]" class="capitalize"> {{key}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <!--<tr ng-repeat="data in data.items">
+                        <td ng-repeat="(key, value) in data">{{value}}</td>          
+                </tr>-->
+                <tr ng-repeat="item in data.items | filter: searchText">
+                        <td>{{item.period}}</td> 
+                        <td>{{item.total}}</td> 
+                        <td>{{item['eloisa moreira']}}</td> 
+                        <td>{{item['william morales']}}</td> 
+                        <td>{{item['lenilda carvalho']}}</td> 
+                        <td>{{item['anamaris gonzalez']}}</td>   
+                        <td>{{item['juliana ambroise']}}</td>   
+                        <td>{{item['ana luiza theriault']}}</td> 
+                        <td>{{item['teresa daveiga']}}</td>         
+                </tr>
+                </tbody>
+            </table>
     </div>
-    <a href="https://github.com/zichenma/angular_map_quest.git" target="_blank">Source Code</a>
+<script  type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.7/angular.min.js"></script>
+<!--<script  type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-smart-table/2.1.8/smart-table.min.js"></script>-->
+<script  type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script  type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" 
+integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script type="text/javascript" src="./table-export/tableExport.js"></script>
+<script type="text/javascript" src="./table-export/jquery.base64.js"></script>
+<script src="js.js"></script>
 </body>
 </html>
 
